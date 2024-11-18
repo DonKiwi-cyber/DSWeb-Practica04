@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <h:head>
+        <title>Práctica 4</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <f:view>
+            <h:form>
+                <h:commandButton action="index.xhtml?faces-redirect=true" value="Regresar"/>
+                <br/>
+                
+                <p:growl id="growl" showDetail="true" />
+                
+                <h1>Clientes</h1>
+                <br/>
+                
+                <div class="inputs">
+                    <div>
+                        <p:outputLabel for="id">ID</p:outputLabel>
+                        <p:inputText id='id' value="#{clienteBean.id}"/>
+                        <p:commandButton id="generar_id" value="Generar ID" 
+                                         update="id" actionListener="#{clienteBean.generarID()}" />
+                    </div>
+                    <div>
+                        <p:outputLabel for="nombre">Nombre</p:outputLabel>
+                        <p:inputText id='nombre' value="#{clienteBean.nombre}"/>
+                    </div>
+                    <div>
+                        <p:outputLabel for="correo">Correo</p:outputLabel>
+                        <p:inputText id='correo' value="#{clienteBean.correo}"/>
+                    </div>
+                </div>
+                <br/>
+                
+                <div class="buttons">
+                    <p:panelGrid columns="3" layout="grid" styleClass="showcase-text-align-center">
+                        <p:commandButton id="btnGuardar" value="Guardar" update="growl, clientes" actionListener="#{clienteBean.generarCliente()}"/>
+                        <p:commandButton id="btnActualizar" value="Actualizar" update="growl, clientes" actionListener="#{clienteBean.actualizarCliente()}"/>
+                        <p:commandButton id="btnEliminar" value="Eliminar" update="growl, clientes" actionListener="#{clienteBean.eliminarCliente()}"/>
+                    </p:panelGrid>
+                </div>
+                <br/>
+                
+                <div class="data">
+                    <p:dataTable id="clientes" var="cliente" value="#{clienteBean.listaClientes}" rowKey="#{cliente.id}" lazy="true">
+                        <f:facet name="header">
+                            Empleados
+                        </f:facet>
+
+                        <p:column headerText="ID">
+                            <h:outputText value="#{cliente.id}" />
+                        </p:column>
+                        <p:column headerText="Nombre">
+                            <h:outputText value="#{cliente.nombre}" />
+                        </p:column>
+                        <p:column headerText="Correo">
+                            <h:outputText value="#{cliente.correo}" />
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </h:form>
+        </f:view>
+    </h:body>
+</html>

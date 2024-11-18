@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
+              http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="ReporteVenta" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20"
+              topMargin="20" bottomMargin="20">
+    
+    <!-- Parámetros -->
+    <parameter name="venta.id_venta" class="java.lang.String"/>
+    
+    <!-- Campos de la tabla ventas -->
+    <field name="venta.id" class="java.lang.String"/>
+    <field name="venta.nombreCliente" class="java.lang.String"/>
+    <field name="venta.fecha" class="java.sql.Date"/>
+
+    <!-- Campos de la tabla DetallesVenta -->
+    <field name="id" class="java.lang.String"/>
+    <field name="producto.id" class="java.lang.String"/>
+    <field name="descripcionProducto" class="java.lang.String"/>
+    <field name="precioProducto" class="java.lang.Double"/>
+    <field name="cantidadProducto" class="java.lang.Integer"/>
+    <field name="total" class="java.lang.Double"/>
+    
+    <!-- Título del reporte -->
+    <title>
+        <band height="50">
+            <staticText>
+                <reportElement x="0" y="0" width="555" height="30"/>
+                <textElement textAlignment="Center"/>
+                <text><![CDATA[Reporte de Venta]]></text>
+            </staticText>
+        </band>
+    </title>
+
+    <!-- Información de la Venta -->
+    <pageHeader>
+        <band height="80">
+            <textField>
+                <reportElement x="0" y="10" width="100" height="20"/>
+                <textElement><font isBold="true"/></textElement>
+                <textFieldExpression><![CDATA["ID Venta: " + $F{venta.id}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="200" y="10" width="200" height="20"/>
+                <textElement><font isBold="true"/></textElement>
+                <textFieldExpression><![CDATA["Cliente: " + $F{venta.nombreCliente}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="200" y="30" width="200" height="20"/>
+                <textElement><font isBold="true"/></textElement>
+                <textFieldExpression><![CDATA["Fecha: " + $F{venta.fecha}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageHeader>
+
+    <!-- Encabezado de la tabla -->
+    <columnHeader>
+        <band height="20">
+            <staticText>
+                <reportElement x="0" y="0" width="80" height="20"/>
+                <textElement><font isBold="true"/></textElement>
+                <text><![CDATA[ID Producto]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="80" y="0" width="180" height="20"/>
+                <textElement><font isBold="true"/></textElement>
+                <text><![CDATA[Descripción]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="260" y="0" width="80" height="20"/>
+                <textElement><font isBold="true"/></textElement>
+                <text><![CDATA[Precio]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="340" y="0" width="60" height="20"/>
+                <textElement><font isBold="true"/></textElement>
+                <text><![CDATA[Cantidad]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="400" y="0" width="80" height="20"/>
+                <textElement><font isBold="true"/></textElement>
+                <text><![CDATA[Total]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <!-- Detalles de Venta -->
+    <detail>
+        <band height="20">
+            <textField>
+                <reportElement x="0" y="0" width="80" height="20"/>
+                <textFieldExpression><![CDATA[$F{producto.id}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="80" y="0" width="180" height="20"/>
+                <textFieldExpression><![CDATA[$F{descripcionProducto}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="260" y="0" width="80" height="20"/>
+                <textFieldExpression><![CDATA[$F{precioProducto}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="340" y="0" width="60" height="20"/>
+                <textFieldExpression><![CDATA[$F{cantidadProducto}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="400" y="0" width="80" height="20"/>
+                <textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+    <!-- Pie de página de la tabla (opcional) -->
+    <columnFooter>
+        <band height="20"/>
+    </columnFooter>
+
+    <!-- Pie de página del reporte -->
+    <pageFooter>
+        <band height="20">
+            <staticText>
+                <reportElement x="0" y="0" width="555" height="20"/>
+                <textElement textAlignment="Center"/>
+                <text><![CDATA[Fin del Reporte]]></text>
+            </staticText>
+        </band>
+    </pageFooter>
+    
+    <!-- Resumen del reporte (opcional) -->
+    <summary>
+        <band height="20"/>
+    </summary>
+
+</jasperReport>

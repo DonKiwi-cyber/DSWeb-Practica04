@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <h:head>
+        <title>Proyecto 04</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <f:view>
+            <h:form>
+                
+                <h:commandButton action="index.xhtml?faces-redirect=true" value="Regresar"/>
+                
+                <p:growl id="growl" showDetail="true" />
+                
+                    <h1>Generador de Ventas</h1>
+                    <p:commandButton id="btnNuevo" value="Nueva venta" update="id_venta, id_cliente, fecha, productos_list" actionListener="#{GenerarVentaBean.crearVenta()}"/> 
+                
+                    <h2>Información de venta</h2>
+                    
+                    <div class="card">
+                            <div class="ui-float-label">
+                                <p:inputText id='id_venta' value="#{GenerarVentaBean.idVenta}"/>
+                                <p:outputLabel for="@previous" value="ID venta"/>
+                                <p:commandButton id="generar_id" value="Generar ID" 
+                                                 update="id_venta" actionListener="#{GenerarVentaBean.generarIDVenta('V')}" />
+                            </div>
+
+                            <div class="ui-float-label">
+                                <p:inputText id='id_cliente' value="#{GenerarVentaBean.idCliente}"/>
+                                <p:outputLabel for="@previous" value="ID cliente"/>
+                            </div>
+                            
+                            <div class="ui-float-label">
+                                <p:datePicker id="fecha" showIcon="true" style="width:auto" value="#{GenerarVentaBean.fecha}"/>
+                                <p:outputLabel for="@previous" value="Fecha"/>
+                            </div>
+                    </div>
+                    
+                    <h2>Introducir Producto</h2>
+                    
+                    <div class="card">
+                            <div class="ui-float-label">
+                                <p:inputText id="id_nuevo_producto" value="#{GenerarVentaBean.idNuevoProducto}"/>
+                                <p:outputLabel for="@previous" value="ID"/>
+                            </div>
+                            <div class="ui-float-label">
+                                <p:inputText id="cantidad_nuevo_producto" value="#{GenerarVentaBean.cantidadNuevoProducto}"/>
+                                <p:outputLabel for="@previous" value="Cantidad"/>
+                            </div>
+                        <p:commandButton icon="pi pi-plus-circle" id="btnAgregar" update="productos_list" actionListener="#{GenerarVentaBean.guardarProducto()}"/>
+                    </div>
+                    
+                    <div class="table">
+                        <p:dataTable id="productos_list" var="producto" value="#{GenerarVentaBean.productos}" rowKey="#{producto.id}" lazy="true" showGridlines="true">
+                            <f:facet name="header">
+                                Productos
+                            </f:facet>
+                            <p:column headerText="ID">
+                                <h:outputText value="#{producto.id}"/>
+                            </p:column>
+                            <p:column headerText="Descripcion">
+                                <h:outputText value="#{producto.descripcion}"/>
+                            </p:column>
+                            <p:column headerText="Precio">
+                                <h:outputText value="#{producto.precio}"/>
+                            </p:column>
+                            <p:column headerText="Cantidad">
+                                <h:outputText value="#{producto.cantidad}"/>
+                            </p:column>
+                            <p:column headerText="Total">
+                                <h:outputText value="#{producto.total}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </div>
+                    <div class="buttons">
+                        <p:commandButton id="btnGuardar" value="Guardar" actionListener="#{GenerarVentaBean.guardarVenta()}"/>
+                        <p:commandButton id="btnImprimir" value="Imprimir" actionListener="#{GenerarVentaBean.imprimirVenta()}"/>
+                        <p:commandButton id="btnEnviar" value="Enviar" actionListener="#{GenerarVentaBean.enviarVenta()}"/>
+                    </div>
+            </h:form>
+        </f:view>
+    </h:body>
+</html>
